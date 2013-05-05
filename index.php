@@ -8,7 +8,6 @@ set_include_path(get_include_path() . ';' . APPLICATION_PATH . '/library');
 # Require class
 require_once 'functions.php';
 require_once 'Database.php';
-require_once 'View.php';
 require_once 'Request.php';
 require_once 'Response.php';
 
