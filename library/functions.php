@@ -1,13 +1,14 @@
 <?php
-# Convert from underscore -> CamelCase
-function underscoreToCamelCase($s, $ucfirst = true) {
-  $s = preg_replace('/_(.?)/e', "strtoupper('$1')", $s);
+# Convert from dash separator -> CamelCase
+function dashToCamelCase($s, $ucfirst = true) {
+  $s = preg_replace('/-(.?)/e', "strtoupper('$1')", $s);
   if ($ucfirst) {
     return ucfirst($s);
   }
   return $s;
 }
 
-function camelCaseToUnderscore($s) {
-  return strtolower(preg_replace('/([^A-Z])([A-Z])/', "$1_$2", $s)); 
+# Convert from separator -> CamelCase
+function camelCaseToDash($s) {
+  return strtolower(preg_replace('/([^A-Z])([A-Z])/', "$1-$2", $s)); 
 }

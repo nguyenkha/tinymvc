@@ -38,7 +38,19 @@ class Request {
   # Routing request
   public function route() {
     # Default router
-    $this->setParam('controller', $this->getQuery('controller', 'index'));
-    $this->setParam('action', $this->getQuery('action', 'index'));
+    // $this->setParam('controller', $this->getQuery('controller', 'index'));
+    // $this->setParam('action', $this->getQuery('action', 'index'));
+    # Rewrite rule (Apache)
+    # /controller/action
+    $path = $_SERVER['PATH_INFO'];
+    $parts = explode('/', $path);
+    $this->setParam('controller', 'index');
+    if ($parts[1]) {
+      $this->setParam('controller', $parts[1]);
+    }
+    $this->setParam('action', 'index');
+    if ($parts[2]) {
+      $this->setParam('action', $parts[2]);
+    }
   }
 }

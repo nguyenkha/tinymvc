@@ -30,12 +30,12 @@ $controllerName = $request->getParam('controller');
 $actionName = $request->getParam('action');
 
 # Create controller
-$controllerClass = underscoreToCamelCase($controllerName, true) . 'Controller';
+$controllerClass = dashToCamelCase($controllerName, true) . 'Controller';
 require_once APPLICATION_PATH . '/controllers/' . $controllerClass . '.php';
 $controller = new $controllerClass($request, $response);
 
 # Process request
-$actionMethod = underscoreToCamelCase($actionName, false) . 'Action';
+$actionMethod = dashToCamelCase($actionName, false) . 'Action';
 $controller->$actionMethod();
 
 # Auto render base on controller and action
