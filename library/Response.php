@@ -4,14 +4,26 @@ require_once 'View.php';
 class Response {
   private $_result = '';
 
+  private $_view;
+
+  # Construct with view
+  public function __construct($view) {
+    $this->_view = $view;
+  }
+
+  # Get view object
+  public function getView() {
+    return $this->_view;
+  }
+
   # Shortcut
   public function render($file, $data = null, $layout = null) {
-    $this->_result = View::render($file, $data, $layout);
+    $this->_result = $this->_view->render($file, $data, $layout);
   }
 
   # Shortcut
   public function renderPartial($file, $data = null) {
-    $this->_result = View::renderPartial($file, $data);
+    $this->_result = $this->_view->renderPartial($file, $data);
   }
 
   # Set response content

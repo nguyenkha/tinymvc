@@ -1,23 +1,41 @@
 <?php
 class View
 {
-  private static $_viewPath;
+  private $_viewPath;
 
-  private static $_defaultLayout = 'layout.php';
+  private $_defaultLayout = 'layout';
 
-  public static function setViewPath($path) {
-    self::$_viewPath = $path;
+  private $_suffix = '.php';
+
+  private $_data = array();
+
+  private $_layout = null;
+
+  public function __construct($viewPath) {
+    $this->_viewPath = $viewPath;
+    $this->layout = new stdClass();
   }
 
-  public static function renderPartial($file, $data = array()) {
-    # Extract data into local variables
-    if (is_array($data)) {
-      extract($data);
+  public function __get($name) {
+    if (array_key_exists($name, $this->_data)) {
+      return $this->_data[$name];
     }
+    return null;
+  }
+
+  public function __set($name, $value) {
+    $this->_data[$name] = $value;
+  }
+
+  public function setViewPath($path) {
+    $this->_viewPath = $path;
+  }
+
+  public function renderPartial($file) {
     # Start output buffer
     ob_start();
     # Render template
-    include self::$_viewPath . '/' . $file;
+    include $this->_viewPath . '/' . $file . $this->_suffix;
     # Get result
     $result = ob_get_contents();
     # Clean buffer
@@ -25,16 +43,20 @@ class View
     return $result;
   }
 
-  public static function render($file, $data = array(), $layout = null) {
+  public function render($file) {
     # Render default layout
-    if (!$layout) {
-      $layout = self::$_defaultLayout;
+    if (!$this->_layout) {
+      $this->_layout = $this->_defaultLayout;
     }
     # Render partial
-    $content = self::renderPartial($file, $data);
-    # Set content to layout
-    $data['layout'] = array('content' => $content);
+    $this->layout->content = $this->renderPartial($file);
     # Render layout
-    return self::renderPartial($layout, $data);
+    return $this->renderPartial($this->_layout);
   }
+
+  public function setLayout($layout) {
+    $this->_layout = $layout;
+  }
+
+  # View helper function here
 }

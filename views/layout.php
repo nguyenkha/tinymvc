@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Hello world</title>
+    <title><?php echo $this->layout->title ?></title>
   </head>
-  <body><?php echo $layout['content']; ?></body>
+  <body><?php echo $this->layout->content; ?></body>
 </html>
