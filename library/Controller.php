@@ -24,7 +24,9 @@ class Controller {
   }
 
   public function autoRender($controller, $action) {
-    $this->_response->render($controller . '/' . $action);
+    if ($this->_autoRender) {
+      $this->_response->render($controller . '/' . $action);
+    }
   }
 
   # Controller helper function here
