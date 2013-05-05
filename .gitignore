@@ -1,5 +1,5 @@
-# Default config
-/config.php.default
+# Config
+/config.php
 
 # Compiled source #
 ###################
