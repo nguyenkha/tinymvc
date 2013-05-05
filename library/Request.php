@@ -42,15 +42,21 @@ class Request {
     // $this->setParam('action', $this->getQuery('action', 'index'));
     # Rewrite rule (Apache)
     # /controller/action
-    $path = $_SERVER['PATH_INFO'];
-    $parts = explode('/', $path);
     $this->setParam('controller', 'index');
-    if ($parts[1]) {
-      $this->setParam('controller', $parts[1]);
-    }
     $this->setParam('action', 'index');
-    if ($parts[2]) {
-      $this->setParam('action', $parts[2]);
+
+    if (array_key_exists('PATH_INFO', $_SERVER)) {
+      $path = $_SERVER['PATH_INFO'];
+      $parts = explode('/', $path);
+      $len = count($parts);
+
+      if ($len > 1 && $parts[1]) {
+        $this->setParam('controller', $parts[1]);
+      }
+      
+      if ($len > 2 && $parts[2]) {
+        $this->setParam('action', $parts[2]);
+      }
     }
   }
 }

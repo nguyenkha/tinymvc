@@ -8,7 +8,7 @@ function dashToCamelCase($s, $ucfirst = true) {
   return $s;
 }
 
-# Convert from separator -> CamelCase
+# Convert from dash separator -> CamelCase
 function camelCaseToDash($s) {
   return strtolower(preg_replace('/([^A-Z])([A-Z])/', "$1-$2", $s)); 
 }
