@@ -16,15 +16,12 @@ require_once 'Response.php';
 $config = require_once 'config.php';
 define('BASE_URL', $config['baseUrl']);
 
-# Create view object
-$view = new View(APPLICATION_PATH . '/views');
-
 # Set database config
 Database::setConfig($config['db']);
 
 # Create request and response object
 $request = new Request();
-$response = new Response($view);
+$response = new Response();
 
 # Routing request
 $request->route();

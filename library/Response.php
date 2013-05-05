@@ -6,9 +6,9 @@ class Response {
 
   private $_view;
 
-  # Construct with view
-  public function __construct($view) {
-    $this->_view = $view;
+  # Create view object
+  public function __construct() {
+    $this->_view = new View(APPLICATION_PATH . '/views');
   }
 
   # Get view object
