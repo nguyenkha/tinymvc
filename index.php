@@ -15,6 +15,9 @@ require_once 'Response.php';
 $config = require_once 'config.php';
 define('BASE_URL', $config['baseUrl']);
 
+# Start session
+session_start();
+
 # Set database config
 Database::setConfig($config['db']);
 
@@ -31,15 +34,35 @@ $actionName = $request->getParam('action');
 
 # Create controller
 $controllerClass = dashToCamelCase($controllerName, true) . 'Controller';
-require_once APPLICATION_PATH . '/controllers/' . $controllerClass . '.php';
-$controller = new $controllerClass($request, $response);
+$controllerPath = APPLICATION_PATH . '/controllers/' . $controllerClass . '.php';
 
-# Process request
-$actionMethod = dashToCamelCase($actionName, false) . 'Action';
-$controller->$actionMethod();
+# Check if file exist
+if (!file_exists($controllerPath)) {
+  $response->fileNotFound();
+} else {
+  # Require file
+  require_once $controllerPath;
 
-# Auto render base on controller and action
-$controller->autoRender($controllerName, $actionName);
+  # Check if class exist
+  if (!class_exists($controllerClass)) {
+    $response->fileNotFound();
+  } else {
+    $controller = new $controllerClass($request, $response);
+
+    # Process request
+    $actionMethod = dashToCamelCase($actionName, false) . 'Action';
+
+    # Check if action exist
+    if (!method_exists($controller, $actionMethod)) {
+      $response->fileNotFound();
+    } else {
+      $controller->$actionMethod();
+      # Auto render base on controller and action
+      $controller->autoRender($controllerName, $actionName);
+    }
+  }
+}
+
 # Get render result
 $result = $response->getResult();
 

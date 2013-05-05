@@ -43,6 +43,7 @@ class Response {
 
   # Error 404
   public function fileNotFound() {
-    $this->render('file-not-found.php');
+    http_response_code(404);
+    $this->render('error/file-not-found');
   }
 }

@@ -22,6 +22,15 @@ class Request {
     return $this->_getValue($_POST, $name, $default);
   }
 
+  # Get session param or all
+  public function getSession($name = null, $default = null) {
+    return $this->_getValue($_SESSION, $name, $default);
+  }
+
+  public function setSession($name, $value) {
+    $_SESSION[$name] = $value;
+  }
+
   public function getParam($name = null, $default = null) {
     return $this->_getValue($this->_params, $name, $default);
   }
