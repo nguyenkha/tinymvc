@@ -17,13 +17,13 @@ class Response {
   }
 
   # Shortcut
-  public function render($file, $data = null, $layout = null) {
-    $this->_result = $this->_view->render($file, $data, $layout);
+  public function render($file, $layout = null) {
+    $this->_result = $this->_view->render($file, $layout);
   }
 
   # Shortcut
-  public function renderPartial($file, $data = null) {
-    $this->_result = $this->_view->renderPartial($file, $data);
+  public function renderPartial($file) {
+    $this->_result = $this->_view->renderPartial($file);
   }
 
   # Set response content
@@ -39,6 +39,7 @@ class Response {
   # Redirect helper
   public function redirect($url) {
     header('Location: ' . $url);
+    exit(0);
   }
 
   # Error 404
