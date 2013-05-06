@@ -2,7 +2,7 @@
 class Request {
   private $_params = array();
 
-  private function _getValue($array, $name, $default = null) {
+  private function _getValue(&$array, $name, $default = null) {
     if ($name === null) {
       return $array;
     }
