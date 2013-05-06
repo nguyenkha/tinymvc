@@ -45,6 +45,7 @@ class Response {
   # Error 404
   public function fileNotFound() {
     http_response_code(404);
+    $this->_view->layout->title = 'File not found';
     $this->render('error/file-not-found');
   }
 }
