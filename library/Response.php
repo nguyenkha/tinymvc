@@ -18,7 +18,10 @@ class Response {
 
   # Shortcut
   public function render($file, $layout = null) {
-    $this->_result = $this->_view->render($file, $layout);
+    if ($layout !== null) {
+      $this->_view->setLayout($layout);
+    }
+    $this->_result = $this->_view->render($file);
   }
 
   # Shortcut
