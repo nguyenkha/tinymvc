@@ -7,6 +7,6 @@ class IndexController extends Controller {
     // $this->_autoRender = false;
     $this->_view->layout->title = 'Tiny MVC framework for PHP';
     $this->_view->message = 'Hello world';
-    // $this->_view->render('index/index');
+    // $this->_response->render('index/index');
   }
 }
