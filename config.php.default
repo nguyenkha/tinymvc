@@ -5,6 +5,7 @@ return array(
     'host' => 'localhost',
     'user' => 'root',
     'password' => 'root',
-    'dbname' => 'tinymvc'
+    'dbname' => 'tinymvc',
+    'port' => 3306
   )
 );
