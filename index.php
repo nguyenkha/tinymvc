@@ -3,7 +3,7 @@
 define('APPLICATION_PATH', __DIR__);
 
 # Add require path
-set_include_path(get_include_path() . ';' . APPLICATION_PATH . '/library;'. APPLICATION_PATH . '/models');
+set_include_path(get_include_path() . PATH_SEPARATOR . APPLICATION_PATH . '/library' . PATH_SEPARATOR . APPLICATION_PATH . '/models');
 
 # Require class
 require_once 'functions.php';
